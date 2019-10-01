@@ -4,5 +4,7 @@ services:
   discord_bot:
     build:
       context: .
+    volumes:
+      - ./auth.json:/app/auth.json
     ports:
       - 8081:8081
