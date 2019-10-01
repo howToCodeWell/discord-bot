@@ -8,9 +8,8 @@ class Help {
         + "--ping : Play ping pong \n"
         + "--lights : Coming Soon \n"
         + "--schedule : Get the schedule \n \n"
-        + "Want to improve this bot? \n "
-        + "Send a PR to https://github.com/howToCodeWell/discord-bot \n "
-
+        + "Want to improve this bot? \n"
+        + "Send a PR to https://github.com/howToCodeWell/discord-bot \n"
         + "```\n";
 
         bot.sendMessage({to: channelID, message: message});
