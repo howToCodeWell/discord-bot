@@ -13,6 +13,12 @@ class Help {
         + "```\n";
 
         bot.sendMessage({to: channelID, message: message});
+        bot.setPresence({
+            game: {
+                name: "you",
+                type: 2
+            },
+        });
     }
 }
 module.exports = Help;
