@@ -1,5 +1,5 @@
 class Help {
-    run(bot, channelID) {
+    run(msg) {
         let message =
           ">>> ** Welcome to the How To Code Well Bot ** \n"
         + "```Commands: \n"
@@ -12,13 +12,7 @@ class Help {
         + "Send a PR to https://github.com/howToCodeWell/discord-bot \n"
         + "```\n";
 
-        bot.sendMessage({to: channelID, message: message});
-        bot.setPresence({
-            game: {
-                name: "you",
-                type: 2
-            },
-        });
+        msg.reply(message);
     }
 }
 module.exports = Help;
