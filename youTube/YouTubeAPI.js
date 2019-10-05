@@ -30,7 +30,25 @@ fs.readFile('client_secret.json', function processClientSecrets(err, content) {
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-function authorize(callback) {
+// function authorize(callback) {
+//
+//     var clientSecret = credentials.installed.client_secret;
+//     var clientId = credentials.installed.client_id;
+//     var redirectUrl = credentials.installed.redirect_uris[0];
+//     var oauth2Client = new OAuth2(clientId, clientSecret, redirectUrl);
+//
+//     // Check if we have previously stored a token.
+//     fs.readFile(TOKEN_PATH, function(err, token) {
+//         if (err) {
+//             getNewToken(oauth2Client, callback);
+//         } else {
+//             oauth2Client.credentials = JSON.parse(token);
+//             callback(oauth2Client);
+//         }
+//     });
+// }
+
+function getToken() {
 
     var clientSecret = credentials.installed.client_secret;
     var clientId = credentials.installed.client_id;
@@ -40,11 +58,11 @@ function authorize(callback) {
     // Check if we have previously stored a token.
     fs.readFile(TOKEN_PATH, function(err, token) {
         if (err) {
-            getNewToken(oauth2Client, callback);
+            getNewToken(oauth2Client);
         } else {
             oauth2Client.credentials = JSON.parse(token);
-            callback(oauth2Client);
         }
+        return oauth2Client;
     });
 }
 
@@ -75,7 +93,7 @@ function getNewToken(oauth2Client, callback) {
             }
             oauth2Client.credentials = token;
             storeToken(token);
-            callback(oauth2Client);
+            return oauth2Client;
         });
     });
 }
@@ -101,5 +119,6 @@ function storeToken(token) {
 
 
 module.exports = {
-    makeCall: authorize
+    // makeCall: authorize,
+    getToken: getToken
 };

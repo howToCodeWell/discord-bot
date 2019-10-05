@@ -10,7 +10,10 @@ client.on('ready', () => {
 
 client.on('message', async msg => {
     if (msg.channel.type === 'dm' && msg.content.startsWith('search: ')) {
-        let term = msg.content.split('search: ').pop();
+        let search_term = msg.content.split('search: ').pop();
+
+
+
         youTubeAPI.searchAll("Node Js", 25).then((data) => {
             console.log(data);
         }, (err) => {
