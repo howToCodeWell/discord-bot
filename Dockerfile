@@ -6,4 +6,4 @@ COPY . /app
 
 CMD node bot.js
 
-EXPOSE 8081
+EXPOSE 8082
