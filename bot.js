@@ -11,7 +11,8 @@ const Lights = require("./commands/Lights");
 const bot = new Discord.Client({ // Load bot
     token: auth.token,
     autorun: true
-});
+})
+
 
 const stdin = process.stdin; // Use the terminal to run JS code
 stdin.on("data", function (input) {
@@ -25,7 +26,11 @@ stdin.on("data", function (input) {
 });
 
 bot.on("ready", function () { // When the bot comes online...
-    console.log("I'm online!");
+    console.info("I'm online!");
+});
+
+bot.on("warn", function (e) { // When something is not right
+    console.error(e);
 });
 
 bot.on("message", function (user, userID, channelID, message, event) { // Message detected
