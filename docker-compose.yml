@@ -7,4 +7,4 @@ services:
     volumes:
       - ./auth.json:/app/auth.json
     ports:
-      - 8082:8082
+      - 8082:80
