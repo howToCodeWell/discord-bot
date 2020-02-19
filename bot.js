@@ -1,3 +1,4 @@
+require('log-timestamp');
 const prefix = "--";
 
 const auth = require("./auth.json");
@@ -6,15 +7,14 @@ const PingPong = require("./commands/PingPong");
 const DiceRoll = require("./commands/DiceRoll");
 const Help = require("./commands/Help");
 const Schedule = require("./commands/Schedule");
-const Lights = require("./commands/Lights");
 
 const bot = new Discord.Client({ // Load bot
     token: auth.token,
     autorun: true
 })
 
-
-const stdin = process.stdin; // Use the terminal to run JS code
+// Use the terminal to run JS code
+const stdin = process.stdin;
 stdin.on("data", function (input) {
     input = input.toString();
     try { // Attempt to run input
@@ -33,10 +33,11 @@ bot.on("warn", function (e) { // When something is not right
     console.error(e);
 });
 
-bot.on("message", function (user, userID, channelID, message, event) { // Message detected
-    if (message.startsWith(prefix)) { // Message starts with prefix
-        let command = message.slice(prefix.length).split(" "); // Split message into words
-        switch (command[0]) { // Execute code depending on first word
+bot.on("message", function (user, userID, channelID, message, event) {
+    if (message.startsWith(prefix)) {
+        console.log(`${message} : ${user} : ${userID} : ${channelID}`)
+        let command = message.slice(prefix.length).split(" ");
+        switch (command[0]) {
             case "ping":
                 new PingPong().play(bot, channelID);
                 break;
@@ -48,9 +49,6 @@ bot.on("message", function (user, userID, channelID, message, event) { // Messag
                 break;
             case "schedule":
                 new Schedule().run(bot, channelID, user);
-                break;
-            case "lights":
-                new Lights().run(bot, channelID);
                 break;
         }
     }
